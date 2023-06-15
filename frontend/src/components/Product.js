@@ -13,7 +13,7 @@ const Product = ({ product }) => {
 
   return (
     <Card>
-      <Card.Img variant="top" src={productImg} />
+      <Card.Img variant="top" src={productImg} height="180px" />
       <Card.Body>
         <Card.Title>{productName}</Card.Title>
         <Card.Text>

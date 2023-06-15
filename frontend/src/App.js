@@ -6,7 +6,9 @@ import Header from "./components/Header";
 const App = () => {
   return (
     <Router>
-      <Header />
+      <div style={{ marginTop: "5rem" }}>
+        <Header />
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
