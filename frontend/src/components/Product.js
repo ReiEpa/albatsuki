@@ -3,17 +3,23 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 const Product = ({ product }) => {
-  const { title, price, category, anime, imageSrc } = product;
+  const {
+    productName,
+    productPrice,
+    productCategory,
+    productAnime,
+    productImg,
+  } = product;
 
   return (
     <Card>
-      <Card.Img variant="top" src={imageSrc} />
+      <Card.Img variant="top" src={productImg} />
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title>{productName}</Card.Title>
         <Card.Text>
-          Price: {price}$ <br />
-          Category: {category} <br />
-          Anime: {anime}
+          Price: {productPrice}$ <br />
+          Category: {productCategory} <br />
+          Anime: {productAnime}
         </Card.Text>
         <Button variant="dark">Add to Cart</Button>
       </Card.Body>

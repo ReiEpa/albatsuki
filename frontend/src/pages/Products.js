@@ -5,56 +5,56 @@ import { Container, Row, Col } from "react-bootstrap";
 const products = [
   {
     id: 1,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
   {
     id: 2,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
   {
     id: 3,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
   {
     id: 4,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
   {
     id: 5,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
   {
     id: 6,
-    title: "Itachi Uchiha Headband",
-    price: 20,
-    category: "Accessories",
-    anime: "Naruto Shippuden",
-    imageSrc:
+    productName: "Itachi Uchiha Headband",
+    productPrice: 20,
+    productCategory: "Accessories",
+    productAnime: "Naruto Shippuden",
+    productImg:
       "https://images-na.ssl-images-amazon.com/images/I/51POWVOfprL.jpg",
   },
 
