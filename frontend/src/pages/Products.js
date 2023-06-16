@@ -9,7 +9,7 @@ const Products = () => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(URL);
+      const res = await fetch(`${URL}/products`);
       const newProducts = await res.json();
       setProductsData(newProducts);
     } catch (error) {

@@ -11,7 +11,7 @@ const AddProduct = ({ productsData, setProductsData }) => {
   });
   const addData = async () => {
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(`${URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
