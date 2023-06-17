@@ -3,25 +3,6 @@
   cursor: pointer;
   letter-spacing: 3px;
 }
-header {
-  background-color: #f8f9fa;
-}
-
-header h1 {
-  color: #212529;
-}
-
-header p {
-  color: #6c757d;
-}
-
-section {
-  padding: 40px 0;
-}
-
-section h2 {
-  margin-bottom: 20px;
-}
 
 footer {
   background-color: #343a40;

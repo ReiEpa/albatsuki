@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Carousel from "react-bootstrap/Carousel";
 
 const Home = () => {
   return (
@@ -20,9 +21,47 @@ const Home = () => {
         <Container>
           <section className="my-5">
             <h2 className="text-center mb-4">Featured Products</h2>
-            <Row>Clothes</Row>
-            <Row>Accessories</Row>
-            <Row>Popular Anime</Row>
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src="https://www.absoluteanime.com/articles/an-otakus-guide-to-collecting-anime-merchandise%5B2%5D.webp"
+                  alt="First slide"
+                  height="400px"
+                />
+
+                <Carousel.Caption>
+                  <h3>Accessories</h3>
+                  <p>Accessories from different animes.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src="https://i0.wp.com/www.animefeminist.com/wp-content/uploads/2022/02/Crystal-1.jpg?fit=1280%2C721&ssl=1"
+                  alt="Second slide"
+                  height="400px"
+                />
+
+                <Carousel.Caption>
+                  <h3>Clothes</h3>
+                  <p>Clothes products from different anime.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="d-block w-100"
+                  src="https://lifekash.com/wp-content/uploads/2022/11/naruto-shippuuden-shonen-jump-monkey-d-luffy-son-goku-wallpaper-preview.jpg"
+                  alt="Third slide"
+                  height="400px"
+                />
+
+                <Carousel.Caption>
+                  <h3>Popular Anime products</h3>
+                  <p>All products from the most popular animes.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </section>
           <section className="my-5">
             <h2 className="text-center mb-4">About Albatsuki</h2>
