@@ -22,7 +22,9 @@ const Header = () => {
   return (
     <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand onClick={() => navigate("/")}>Albatsuki</Navbar.Brand>
+        <Navbar.Brand onClick={() => navigate("/")}>
+          <span id="brand">Albatsuki</span>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
