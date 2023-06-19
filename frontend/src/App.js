@@ -8,6 +8,9 @@ import { ShopContextProvider } from "./cart-context/Shop-Context";
 import Accessories from "./pages/Accessories";
 import Clothes from "./pages/Clothes";
 import Popular from "./pages/Popular";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -23,7 +26,12 @@ const App = () => {
           <Route path="/clothes" element={<Clothes />} />
           <Route path="/popular" element={<Popular />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
+        <div>
+          <Footer />
+        </div>
       </Router>
     </ShopContextProvider>
   );
