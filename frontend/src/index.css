@@ -1,9 +1,57 @@
+/* ////////////// HEADER ////////////// */
 #brand {
   color: orangered;
   cursor: pointer;
   letter-spacing: 3px;
 }
 
+/* /////////////// HOME ////////////  */
+.featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .featured {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 425px) {
+  .featured {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+}
+.about-albatsuki {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.about-albatsuki p {
+  margin-bottom: 10px;
+}
+
+.why-choose {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.why-choose ul {
+  margin-bottom: 10px;
+}
+
+.contact-us {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.contact-us ul {
+  margin-bottom: 10px;
+}
+/* /////////////////// FOOTER //////////////  */
 footer {
   background-color: #343a40;
   color: #fff;

@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
-import Carousel from "react-bootstrap/Carousel";
+import Card from "react-bootstrap/Card";
 
 const Home = () => {
   return (
@@ -21,51 +21,57 @@ const Home = () => {
         <Container>
           <section className="my-5">
             <h2 className="text-center mb-4">Featured Products</h2>
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="https://www.absoluteanime.com/articles/an-otakus-guide-to-collecting-anime-merchandise%5B2%5D.webp"
-                  alt="First slide"
-                  height="400px"
-                />
-
-                <Carousel.Caption>
-                  <h3>Accessories</h3>
-                  <p>Accessories from different animes.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="https://i0.wp.com/www.animefeminist.com/wp-content/uploads/2022/02/Crystal-1.jpg?fit=1280%2C721&ssl=1"
-                  alt="Second slide"
-                  height="400px"
-                />
-
-                <Carousel.Caption>
-                  <h3>Clothes</h3>
-                  <p>Clothes products from different anime.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="https://lifekash.com/wp-content/uploads/2022/11/naruto-shippuuden-shonen-jump-monkey-d-luffy-son-goku-wallpaper-preview.jpg"
-                  alt="Third slide"
-                  height="400px"
-                />
-
-                <Carousel.Caption>
-                  <h3>Popular Anime products</h3>
-                  <p>All products from the most popular animes.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
+            <div className="featured">
+              <Card
+                className="bg-secondary text-light"
+                style={{ width: "18rem", cursor: "pointer" }}
+              >
+                <Card.Body>
+                  <Card.Title>Popular Anime Products</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Clothes/Accessories
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Here you can find all products from the most popular animes
+                    around the world.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card
+                className="bg-secondary text-light"
+                style={{ width: "18rem", cursor: "pointer" }}
+              >
+                <Card.Body>
+                  <Card.Title>Accessories</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Accessories
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Here you can find all accessories from the most popular
+                    animes around the world.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card
+                className="bg-secondary text-light"
+                style={{ width: "18rem", cursor: "pointer" }}
+              >
+                <Card.Body>
+                  <Card.Title>Clothes</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Clothes
+                  </Card.Subtitle>
+                  <Card.Text>
+                    Here you can find all clothes from the most popular animes
+                    around the world.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
           </section>
           <section className="my-5">
             <h2 className="text-center mb-4">About Albatsuki</h2>
-            <Row>
+            <Row className="about-albatsuki">
               <Col>
                 <p>
                   Albatsuki is a leading online retailer of anime clothes and
@@ -82,7 +88,7 @@ const Home = () => {
           </section>
           <section className="my-5">
             <h2 className="text-center mb-4">Why Choose Albatsuki?</h2>
-            <Row>
+            <Row className="why-choose">
               <Col>
                 <ul>
                   <li>High-quality products with authentic anime designs</li>
@@ -95,7 +101,7 @@ const Home = () => {
           </section>
           <section className="my-5">
             <h2 className="text-center mb-4">Contact Us</h2>
-            <Row>
+            <Row className="contact-us">
               <Col>
                 <p>
                   If you have any questions or inquiries, feel free to contact
