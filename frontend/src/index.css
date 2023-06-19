@@ -81,6 +81,23 @@ footer {
   height: 330px;
   background-color: rgb(139, 99, 99);
 }
+.shop-now {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.shop-now button {
+  background-color: #f2f2f2;
+  border: none;
+  width: 50%;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+.shop-now button:hover {
+  background-color: orangered;
+  color: white;
+  transition: 0.5s;
+}
 .bottom-left-action {
   width: 550px;
   height: 330px;

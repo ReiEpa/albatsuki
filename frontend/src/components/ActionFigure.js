@@ -7,7 +7,9 @@ const ActionFigure = () => {
         <div className="top-left-action">
           <img src="" alt="Albatsuki" />
           <h1>ACTION FIGURE SERIES</h1>
-          <button>SHOP NOW</button>
+          <div className="shop-now">
+            <button>SHOP NOW</button>
+          </div>
         </div>
         <div className="bottom-left-action">
           <div className="bottom-left-action-left"></div>
