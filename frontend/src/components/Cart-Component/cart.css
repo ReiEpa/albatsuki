@@ -27,11 +27,13 @@
   font-size: 30px;
 }
 .countHandler button {
+  border: none;
   width: 40px;
 }
 .countHandler input {
-  width: 50px;
+  width: 30px;
   text-align: center;
+  border: none;
   font-weight: bolder;
 }
 
