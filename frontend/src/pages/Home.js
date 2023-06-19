@@ -4,8 +4,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   return (
     <div>
       <header className="py-5 text-center">
@@ -25,6 +27,7 @@ const Home = () => {
               <Card
                 className="bg-secondary text-light"
                 style={{ width: "18rem", cursor: "pointer" }}
+                onClick={() => navigate("/popular")}
               >
                 <Card.Body>
                   <Card.Title>Popular Anime Products</Card.Title>
@@ -40,6 +43,7 @@ const Home = () => {
               <Card
                 className="bg-secondary text-light"
                 style={{ width: "18rem", cursor: "pointer" }}
+                onClick={() => navigate("/accessories")}
               >
                 <Card.Body>
                   <Card.Title>Accessories</Card.Title>
@@ -55,6 +59,7 @@ const Home = () => {
               <Card
                 className="bg-secondary text-light"
                 style={{ width: "18rem", cursor: "pointer" }}
+                onClick={() => navigate("/clothes")}
               >
                 <Card.Body>
                   <Card.Title>Clothes</Card.Title>

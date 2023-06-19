@@ -31,10 +31,16 @@ const Header = () => {
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate("/products")}>Products</Nav.Link>
             <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item>Accessories</NavDropdown.Item>
-              <NavDropdown.Item>Clothes</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/accessories")}>
+                Accessories
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/clothes")}>
+                Clothes
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item>Popular Anime</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => navigate("/popular")}>
+                Popular Anime
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
