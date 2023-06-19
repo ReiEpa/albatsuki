@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Cart from "./Cart-Component/Cart";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
           <Nav>
             <Nav.Link>Login</Nav.Link>
             <Nav.Link>Register</Nav.Link>
-            <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link>
+            {/* <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link> */}
             <Nav.Link onClick={handleCartClick}>
               <AiOutlineShoppingCart />
             </Nav.Link>
@@ -51,8 +52,7 @@ const Header = () => {
             <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            Some text as a placeholder. In real life, you can have the elements
-            you have chosen, like text, images, lists, etc.
+            <Cart />
           </Offcanvas.Body>
         </Offcanvas>
       )}
