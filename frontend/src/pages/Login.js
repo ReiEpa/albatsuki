@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   MDBBtn,
   MDBContainer,
@@ -54,7 +54,7 @@ const Login = () => {
         <MDBCol sm="6" className="d-none d-sm-block px-0">
           <img
             src="https://www.tradnow.co/wp-content/uploads/2021/07/Naruto-Shippuden-Top-20-Akatsuki-members-from-Weakest-to-Strongest.jpg"
-            alt="Login image"
+            alt="Login"
             className="w-100"
             style={{ objectFit: "cover", objectPosition: "left" }}
           />

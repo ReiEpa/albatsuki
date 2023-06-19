@@ -2,33 +2,32 @@ import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
 import { URL } from "../apis/URL";
-import AddProduct from "../admin/AddProduct";
+// import AddProduct from "../admin/AddProduct";
 
 const Products = ({ category }) => {
   const [productsData, setProductsData] = useState([]);
   const [animeFilter, setAnimeFilter] = useState("");
 
-  const fetchData = async () => {
-    try {
-      const url = category
-        ? `${URL}/products?category=${category}`
-        : `${URL}/products`;
-      const res = await fetch(url);
-      const newProducts = await res.json();
-      // Add a unique identifier to each product
-      const productsWithIds = newProducts.map((product, index) => ({
-        ...product,
-        id: index + 1, // Start the IDs from 1 instead of 0
-      }));
-      setProductsData(productsWithIds);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = category
+          ? `${URL}/products?category=${category}`
+          : `${URL}/products`;
+        const res = await fetch(url);
+        const newProducts = await res.json();
+        // Add a unique identifier to each product
+        const productsWithIds = newProducts.map((product, index) => ({
+          ...product,
+          id: index + 1, // Start the IDs from 1 instead of 0
+        }));
+        setProductsData(productsWithIds);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [category]);
 
   const animeOptions = Array.from(
     new Set(productsData.map((product) => product.productAnime))

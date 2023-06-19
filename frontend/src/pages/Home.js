@@ -1,10 +1,11 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
+import About from "../components/About";
+import ActionFigure from "../components/ActionFigure";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -74,57 +75,11 @@ const Home = () => {
               </Card>
             </div>
           </section>
-          <section className="my-5">
-            <h2 className="text-center mb-4">About Albatsuki</h2>
-            <Row className="about-albatsuki">
-              <Col>
-                <p>
-                  Albatsuki is a leading online retailer of anime clothes and
-                  accessories in Albania. We offer a wide range of products
-                  inspired by your favorite anime series, including t-shirts,
-                  hoodies, figurines, keychains, and more.
-                </p>
-                <p>
-                  Explore our collection and find the perfect merchandise to
-                  show off your love for anime.
-                </p>
-              </Col>
-            </Row>
-          </section>
-          <section className="my-5">
-            <h2 className="text-center mb-4">Why Choose Albatsuki?</h2>
-            <Row className="why-choose">
-              <Col>
-                <ul>
-                  <li>High-quality products with authentic anime designs</li>
-                  <li>Fast and reliable shipping</li>
-                  <li>Secure payment options</li>
-                  <li>Responsive customer support</li>
-                </ul>
-              </Col>
-            </Row>
-          </section>
-          <section className="my-5">
-            <h2 className="text-center mb-4">Contact Us</h2>
-            <Row className="contact-us">
-              <Col>
-                <p>
-                  If you have any questions or inquiries, feel free to contact
-                  us:
-                </p>
-                <ul>
-                  <li>Email: info@albatsuki.com</li>
-                  <li>Phone: +355 123 456 789</li>
-                  <li>Address: 123 Anime Street, Tirana, Albania</li>
-                </ul>
-              </Col>
-            </Row>
-          </section>
+
+          <ActionFigure />
+          <About />
         </Container>
       </main>
-      <footer className="text-center py-3">
-        <p>&copy; 2023 Albatsuki. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
