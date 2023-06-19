@@ -14,5 +14,6 @@ Here are the things we are yet to do:
 5.Adding new features like for example: (
 1.A non-stop playing song while shopping.
 2.Ranged Price Filters.
-3.Anything else
+3.Checkout to buy.
+4.etc
 )
