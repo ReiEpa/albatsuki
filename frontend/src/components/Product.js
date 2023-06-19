@@ -3,16 +3,21 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { ShopContext } from "../cart-context/Shop-Context";
 
-const Product = ({ product, id }) => {
+const Product = ({ product }) => {
   const { addToCart, cartItems } = useContext(ShopContext);
-  const cartItemAmount = cartItems[id];
   const {
+    id,
     productName,
     productPrice,
     productCategory,
     productAnime,
     productImg,
   } = product;
+  const cartItemAmount = cartItems[id] || 0;
+
+  const handleAddToCart = () => {
+    addToCart(id);
+  };
 
   return (
     <Card>
@@ -24,8 +29,8 @@ const Product = ({ product, id }) => {
           Category: {productCategory} <br />
           Anime: {productAnime}
         </Card.Text>
-        <Button variant="dark" onClick={() => addToCart(id)}>
-          Add to Cart {cartItemAmount > 0 && <>({cartItemAmount})</>}
+        <Button variant="dark" onClick={handleAddToCart}>
+          Add to Cart {cartItemAmount > 0 && `(${cartItemAmount})`}
         </Button>
       </Card.Body>
     </Card>

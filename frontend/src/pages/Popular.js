@@ -19,8 +19,13 @@ const Popular = () => {
         ];
         const animeQuery = animeList.join(",");
         const res = await fetch(`${URL}/products?anime=${animeQuery}`);
-        const products = await res.json();
-        setPopularProducts(products);
+        const newProducts = await res.json();
+        // Add a unique identifier to each product
+        const productsWithIds = newProducts.map((product, index) => ({
+          ...product,
+          id: index + 1, // Start the IDs from 1 instead of 0
+        }));
+        setPopularProducts(productsWithIds);
       } catch (error) {
         console.log(error);
       }

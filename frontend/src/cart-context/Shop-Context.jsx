@@ -5,20 +5,18 @@ export const ShopContext = createContext(null);
 
 export const ShopContextProvider = ({ children }) => {
   const [productsData, setProductsData] = useState([]);
-  const [cartItems, setCartItems] = useState({}); // Initialize cartItems as an empty object
+  const [cartItems, setCartItems] = useState({});
 
   const fetchData = async () => {
     try {
       const res = await fetch(`${URL}/products`);
       const newProducts = await res.json();
-      // Add a unique identifier to each product
       const productsWithIds = newProducts.map((product, index) => ({
         ...product,
-        id: index + 1, // Start the IDs from 1 instead of 0
+        id: index + 1,
       }));
       setProductsData(productsWithIds);
 
-      // Initialize cartItems with the correct keys and initial quantity of 0
       const defaultCart = {};
       for (let i = 1; i <= productsWithIds.length; i++) {
         defaultCart[i] = 0;
