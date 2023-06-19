@@ -56,8 +56,8 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link>Login</Nav.Link>
-            <Nav.Link>Register</Nav.Link>
+            <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
+            <Nav.Link onClick={() => navigate("/register")}>Register</Nav.Link>
             {/* <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link> */}
             <Nav.Link onClick={handleCartClick}>
               <div className="cart-icon">
