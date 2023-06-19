@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -6,11 +6,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+
+import { ShopContext } from "../cart-context/Shop-Context";
 import Cart from "./Cart-Component/Cart";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
   let navigate = useNavigate();
+  const { cartItems } = useContext(ShopContext);
 
   const handleCartClick = () => {
     setShowCart(!showCart); // Toggle the visibility of the shopping cart
@@ -20,6 +23,14 @@ const Header = () => {
     setShowCart(false); // Close the shopping cart
   };
 
+  const getCartItemCount = () => {
+    // Calculate the total number of items in the cart
+    const itemCount = Object.values(cartItems).reduce(
+      (total, count) => total + count,
+      0
+    );
+    return itemCount;
+  };
   return (
     <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -41,7 +52,12 @@ const Header = () => {
             <Nav.Link>Register</Nav.Link>
             {/* <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link> */}
             <Nav.Link onClick={handleCartClick}>
-              <AiOutlineShoppingCart />
+              <div className="cart-icon">
+                <AiOutlineShoppingCart />
+                {getCartItemCount() > 0 && (
+                  <span className="cart-count">{getCartItemCount()}</span>
+                )}
+              </div>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
