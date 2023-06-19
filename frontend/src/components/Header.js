@@ -38,6 +38,7 @@ const Header = () => {
           <Nav>
             <Nav.Link>Login</Nav.Link>
             <Nav.Link>Register</Nav.Link>
+            <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link>
             <Nav.Link onClick={handleCartClick}>
               <AiOutlineShoppingCart />
             </Nav.Link>
