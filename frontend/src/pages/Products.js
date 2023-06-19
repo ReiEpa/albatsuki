@@ -14,7 +14,12 @@ const Products = ({ category }) => {
         : `${URL}/products`;
       const res = await fetch(url);
       const newProducts = await res.json();
-      setProductsData(newProducts);
+      // Add a unique identifier to each product
+      const productsWithIds = newProducts.map((product, index) => ({
+        ...product,
+        id: index + 1, // Start the IDs from 1 instead of 0
+      }));
+      setProductsData(productsWithIds);
     } catch (error) {
       console.log(error);
     }
@@ -23,6 +28,7 @@ const Products = ({ category }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <Container>
       {/* <AddProduct
@@ -30,9 +36,9 @@ const Products = ({ category }) => {
         setProductsData={setProductsData}
       /> */}
       <Row className="grid g-3 ">
-        {productsData.map((product, id) => (
-          <Col key={id} xs={12} sm={6} md={4} xl={3}>
-            <Product product={product} />
+        {productsData.map((product) => (
+          <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
+            <Product product={product} id={product.id} />
           </Col>
         ))}
       </Row>
