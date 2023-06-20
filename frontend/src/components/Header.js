@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ShopContext } from "../cart-context/Shop-Context";
 import Cart from "./Cart-Component/Cart";
+import MusicPlayer from "../features/MusicPlayer";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
@@ -31,6 +32,7 @@ const Header = () => {
     );
     return itemCount;
   };
+
   return (
     <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -70,6 +72,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      <MusicPlayer />
       {showCart && (
         <Offcanvas show={showCart} onHide={handleCloseCart} placement="end">
           <Offcanvas.Header closeButton>

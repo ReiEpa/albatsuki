@@ -135,3 +135,8 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* ================== LOGIN ========================== */
+.login-register {
+  cursor: pointer;
+}

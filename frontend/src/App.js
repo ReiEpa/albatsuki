@@ -19,17 +19,19 @@ const App = () => {
         <div style={{ marginTop: "5rem" }}>
           <Header />
         </div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/accessories" element={<Accessories />} />
-          <Route path="/clothes" element={<Clothes />} />
-          <Route path="/popular" element={<Popular />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-        <div>
+        <div style={{ minHeight: "85vh" }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/accessories" element={<Accessories />} />
+            <Route path="/clothes" element={<Clothes />} />
+            <Route path="/popular" element={<Popular />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+        <div style={{ marginTop: "1rem" }}>
           <Footer />
         </div>
       </Router>

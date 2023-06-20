@@ -1,66 +1,40 @@
 import React from "react";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-  MDBInput,
-} from "mdb-react-ui-kit";
+import albatsuki from "../assets/Albatsuki.jpg";
+import Form from "react-bootstrap/Form";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const Login = () => {
   return (
-    <MDBContainer fluid>
-      <MDBRow>
-        <MDBCol sm="6">
-          <div className="d-flex flex-row ps-5 pt-5">
-            <MDBIcon fas icon="crow fa-3x me-3" style={{ color: "#709085" }} />
-            <span className="h1 fw-bold mb-0">Logo</span>
-          </div>
-
-          <div className="d-flex flex-column justify-content-center h-custom-2 w-75 pt-4">
-            <h3
-              className="fw-normal mb-3 ps-5 pb-3"
-              style={{ letterSpacing: "1px" }}
-            >
-              Log in
-            </h3>
-
-            <MDBInput
-              wrapperClass="mb-4 mx-5 w-100"
-              label="Username"
-              id="formControlLg"
-              type="text"
-              size="lg"
-            />
-            <MDBInput
-              wrapperClass="mb-4 mx-5 w-100"
-              label="Password"
-              id="formControlLg"
-              type="password"
-              size="lg"
-            />
-
-            <MDBBtn className="mb-4 px-5 mx-5 w-100" color="info" size="lg">
-              Login
-            </MDBBtn>
-
-            <p className="ms-5">
-              Don't have an account? / <span>Register here</span>
-            </p>
-          </div>
-        </MDBCol>
-
-        <MDBCol sm="6" className="d-none d-sm-block px-0">
-          <img
-            src="https://www.tradnow.co/wp-content/uploads/2021/07/Naruto-Shippuden-Top-20-Akatsuki-members-from-Weakest-to-Strongest.jpg"
-            alt="Login"
-            className="w-100"
-            style={{ objectFit: "cover", objectPosition: "left" }}
-          />
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+    <Container style={{ height: "85vh" }}>
+      <Row style={{ height: "100%" }} className="align-items-center">
+        <Col md={6}>
+          <img src={albatsuki} alt="Logo" />
+        </Col>
+        <Col md={6}>
+          <Form>
+            <Form.Group className="mb-3" controlId="formGroupEmail">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control type="text" placeholder="Enter Username" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Button variant="danger">Login</Button>
+          </Form>
+          <Row className="mt-3">
+            <Col>
+              Don't have an account? /
+              <span className="text-success login-register">
+                {" "}
+                Register here
+              </span>
+              .
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
