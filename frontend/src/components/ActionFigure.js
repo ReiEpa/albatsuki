@@ -1,7 +1,9 @@
 import React from "react";
 import albatsuki from "../assets/Albatsuki.jpg";
+import { useNavigate } from "react-router-dom";
 
 const ActionFigure = () => {
+  const navigate = useNavigate();
   return (
     <div className="action-figure-container">
       <div className="left-action-figure">
@@ -11,7 +13,7 @@ const ActionFigure = () => {
           </div>
           <span className="action-text">ACTION FIGURE SERIES</span>
           <div className="shop-now">
-            <button>SHOP NOW</button>
+            <button onClick={() => navigate("/products")}>SHOP NOW</button>
           </div>
         </div>
         <div className="bottom-left-action">

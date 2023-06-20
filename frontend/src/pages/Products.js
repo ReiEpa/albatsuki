@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
 import { URL } from "../apis/URL";
+import { ShopContext } from "../cart-context/Shop-Context";
+
 // import AddProduct from "../admin/AddProduct";
 
 const Products = ({ category }) => {
   const [productsData, setProductsData] = useState([]);
   const [animeFilter, setAnimeFilter] = useState("");
+
+  const { searchQuery } = useContext(ShopContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +39,9 @@ const Products = ({ category }) => {
 
   const filteredProducts = productsData.filter(
     (product) =>
-      animeFilter === "" || product.productAnime.includes(animeFilter)
+      (animeFilter === "" || product.productAnime.includes(animeFilter)) &&
+      (searchQuery === "" ||
+        product.productName.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
@@ -57,7 +63,7 @@ const Products = ({ category }) => {
           ))}
         </select>
       </div>
-      <Row className="grid g-3 ">
+      <Row className="grid g-3">
         {filteredProducts.map((product) => (
           <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
             <Product product={product} id={product.id} />

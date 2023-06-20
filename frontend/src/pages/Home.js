@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import About from "../components/About";
 import ActionFigure from "../components/ActionFigure";
+import Slideshow from "../components/Slideshow";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -76,6 +77,7 @@ const Home = () => {
             </div>
           </section>
 
+          <Slideshow />
           <ActionFigure />
           <About />
         </Container>
