@@ -15,24 +15,24 @@ const Footer = () => {
         </div>
 
         <div>
-          <a href="" className="me-4 text-reset">
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="facebook-f" />
-          </a>
-          <a href="" className="me-4 text-reset">
+          </button>
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="twitter" />
-          </a>
-          <a href="" className="me-4 text-reset">
+          </button>
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="google" />
-          </a>
-          <a href="" className="me-4 text-reset">
+          </button>
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="instagram" />
-          </a>
-          <a href="" className="me-4 text-reset">
+          </button>
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="linkedin" />
-          </a>
-          <a href="" className="me-4 text-reset">
+          </button>
+          <button className="me-4 text-reset" onClick={() => {}}>
             <MDBIcon fab icon="github" />
-          </a>
+          </button>
         </div>
       </section>
 
@@ -125,7 +125,9 @@ const Footer = () => {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
       >
         © 2023 Copyright:
-        <a className="text-reset fw-bold">ALBATSUKI</a>
+        <a className="text-reset fw-bold" href="#!">
+          ALBATSUKI
+        </a>
       </div>
     </MDBFooter>
   );
