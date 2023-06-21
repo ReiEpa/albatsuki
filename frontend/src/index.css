@@ -58,6 +58,8 @@ footer {
 }
 
 /* ActionFigure*/
+/* ActionFigure /////////////////////////////////*/
+/* ActionFigure*/
 .action-figure-container {
   padding: 2rem;
   background-color: rgb(57, 61, 61);
@@ -167,4 +169,63 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* ABOUT */ /* ABOUT */ /* ABOUT */ /* ABOUT */ /* ABOUT */ /* ABOUT */
+.about-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.about-section h2 {
+  color: #333;
+}
+
+.about-albatsuki p {
+  margin-bottom: 10px;
+}
+
+.why-choose-section {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.why-choose-section h2 {
+  color: #333;
+}
+
+.why-choose ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.contact-section {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.contact-section h2 {
+  color: #333;
+}
+
+.contact-us ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.contact-us li {
+  margin-bottom: 5px;
+}
+
+.contact-us li:before {
+  content: "•";
+  margin-right: 5px;
+}
+.about-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 200px; /* Adjust the max-height value as per your preference */
 }
