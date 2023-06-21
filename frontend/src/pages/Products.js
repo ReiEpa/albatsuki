@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
 import { URL } from "../apis/URL";
-// import AddProduct from "../admin/AddProduct";
+import { ShopContext } from "../cart-context/Shop-Context";
+import ProductFilters from "../components/ProductFilters";
 
 const Products = ({ category }) => {
   const [productsData, setProductsData] = useState([]);
-  const [animeFilter, setAnimeFilter] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const { searchQuery } = useContext(ShopContext);
 
   useEffect(() => {
+    // Fetch products based on category (optional)
     const fetchData = async () => {
       try {
         const url = category
@@ -16,10 +20,9 @@ const Products = ({ category }) => {
           : `${URL}/products`;
         const res = await fetch(url);
         const newProducts = await res.json();
-        // Add a unique identifier to each product
         const productsWithIds = newProducts.map((product, index) => ({
           ...product,
-          id: index + 1, // Start the IDs from 1 instead of 0
+          id: index + 1,
         }));
         setProductsData(productsWithIds);
       } catch (error) {
@@ -29,40 +32,40 @@ const Products = ({ category }) => {
     fetchData();
   }, [category]);
 
-  const animeOptions = Array.from(
-    new Set(productsData.map((product) => product.productAnime))
-  );
-
-  const filteredProducts = productsData.filter(
-    (product) =>
-      animeFilter === "" || product.productAnime.includes(animeFilter)
-  );
+  useEffect(() => {
+    // Apply filters when filter values or products data change
+    const applyFilters = () => {
+      let filtered = productsData.filter(
+        (product) =>
+          searchQuery === "" ||
+          product.productName.toLowerCase().includes(searchQuery.toLowerCase()) // Filter by search query
+      );
+      setFilteredProducts(filtered);
+    };
+    applyFilters();
+  }, [searchQuery, productsData]);
 
   return (
     <Container>
-      {/* <AddProduct
+      <ProductFilters
         productsData={productsData}
-        setProductsData={setProductsData}
-      /> */}
-      <div>
-        <select
-          value={animeFilter}
-          onChange={(e) => setAnimeFilter(e.target.value)}
-        >
-          <option value="">All Anime</option>
-          {animeOptions.map((anime) => (
-            <option key={anime} value={anime}>
-              {anime}
-            </option>
-          ))}
-        </select>
-      </div>
-      <Row className="grid g-3 ">
-        {filteredProducts.map((product) => (
-          <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
-            <Product product={product} id={product.id} />
+        setFilteredProducts={setFilteredProducts}
+      />
+
+      <hr className="my-3" />
+
+      <Row className="grid g-3">
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
+              <Product product={product} id={product.id} />
+            </Col>
+          ))
+        ) : (
+          <Col>
+            <h1>No items to be shown</h1>
           </Col>
-        ))}
+        )}
       </Row>
     </Container>
   );

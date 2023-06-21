@@ -7,6 +7,8 @@ export const ShopContextProvider = ({ children }) => {
   const [productsData, setProductsData] = useState([]);
   const [cartItems, setCartItems] = useState({});
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const fetchData = async () => {
     try {
       const res = await fetch(`${URL}/products`);
@@ -43,6 +45,10 @@ export const ShopContextProvider = ({ children }) => {
     setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
   };
 
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -63,6 +69,11 @@ export const ShopContextProvider = ({ children }) => {
     productsData,
     updateCartItemCount,
     getTotalCartAmount,
+    setProductsData,
+    handleSearch,
+
+    searchQuery,
+    setSearchQuery,
   };
 
   return (

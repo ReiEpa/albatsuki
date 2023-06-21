@@ -1,11 +1,11 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-
 import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import About from "../components/About";
 import ActionFigure from "../components/ActionFigure";
+import Slideshow from "../components/Slideshow";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -16,7 +16,7 @@ const Home = () => {
         <p>Your one-stop shop for anime clothes and accessories in Albania</p>
         <Image
           src="https://wallpapercave.com/wp/wp8662873.jpg"
-          roundedCircle
+          roundedCircle="true" // Update this line to roundedCircle="true"
           height="150px"
         />
       </header>
@@ -75,8 +75,11 @@ const Home = () => {
               </Card>
             </div>
           </section>
-
+          <hr className="my-5" />
+          <Slideshow />
+          <hr className="my-5" />
           <ActionFigure />
+          <hr className="my-5" />
           <About />
         </Container>
       </main>
