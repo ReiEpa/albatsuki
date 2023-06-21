@@ -9,20 +9,20 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
 
   const handleFilters = (event) => {
     const { name, value } = event.target;
-    setFilteredProducts((prevProducts) =>
-      productsData.filter((product) => {
-        switch (name) {
-          case "anime":
-            return value === "" || product.productAnime === value;
-          case "minPrice":
-            return value === "" || product.productPrice >= parseInt(value);
-          case "maxPrice":
-            return value === "" || product.productPrice <= parseInt(value);
-          default:
-            return true;
-        }
-      })
-    );
+    const filteredProducts = productsData.filter((product) => {
+      switch (name) {
+        case "anime":
+          return value === "" || product.productAnime === value;
+        case "minPrice":
+          return value === "" || product.productPrice >= parseInt(value);
+        case "maxPrice":
+          return value === "" || product.productPrice <= parseInt(value);
+        default:
+          return true;
+      }
+    });
+
+    setFilteredProducts(filteredProducts);
   };
 
   const { handleSearch } = useContext(ShopContext);

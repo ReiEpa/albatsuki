@@ -55,11 +55,17 @@ const Products = ({ category }) => {
       <hr className="my-3" />
 
       <Row className="grid g-3">
-        {filteredProducts.map((product) => (
-          <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
-            <Product product={product} id={product.id} />
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <Col key={product.id} xs={12} sm={6} md={4} xl={3}>
+              <Product product={product} id={product.id} />
+            </Col>
+          ))
+        ) : (
+          <Col>
+            <h1>No items to be shown</h1>
           </Col>
-        ))}
+        )}
       </Row>
     </Container>
   );
