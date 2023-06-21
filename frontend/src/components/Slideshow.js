@@ -30,7 +30,7 @@ const slides = [
   },
   {
     image:
-      "https://cdn.wisata.app/diary/ab217c32-8586-468b-9aa0-f7eaf762e2e0.jpg",
+      "https://lemiapp.com/api/v3/fullsize?url=https://lemi.travel/uploads/picture-1586698314653.jpg",
     alt: "Slideshow 6",
   },
   {
@@ -45,7 +45,7 @@ const slides = [
   },
   {
     image:
-      "https://cdn.wisata.app/diary/ab217c32-8586-468b-9aa0-f7eaf762e2e0.jpg",
+      "https://thumbs.dreamstime.com/b/one-piece-characters-tokyo-tower-japan-201172278.jpg",
     alt: "Slideshow 9",
   },
 ];
@@ -70,25 +70,48 @@ const responsive = {
 
 const Slideshow = () => {
   return (
-    <Carousel
-      responsive={responsive}
-      infinite
-      autoPlay
-      autoPlaySpeed={3000}
-      removeArrowOnDeviceType={["tablet", "mobile"]}
-      containerClass="carousel-container"
-      style={{ height: "900px" }} // Set the height to 600 pixels
+    <div
+      style={{
+        height: "600px",
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "black",
+      }}
     >
-      {slides.map((slide, index) => (
-        <div key={index}>
-          <img
-            src={slide.image}
-            alt={slide.alt}
-            style={{ width: "100%", height: "100%" }}
-          />
-        </div>
-      ))}
-    </Carousel>
+      <Carousel
+        responsive={responsive}
+        infinite
+        autoPlay
+        autoPlaySpeed={3000}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        containerClass="carousel-container"
+        style={{ height: "100%" }}
+      >
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            style={{
+              position: "relative",
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={slide.image}
+              alt={slide.alt}
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 

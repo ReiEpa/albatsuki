@@ -76,9 +76,11 @@ const Home = () => {
               </Card>
             </div>
           </section>
-
+          <hr className="my-5" />
           <Slideshow />
+          <hr className="my-5" />
           <ActionFigure />
+          <hr className="my-5" />
           <About />
         </Container>
       </main>
