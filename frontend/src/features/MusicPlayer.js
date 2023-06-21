@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import audioFile from "./DB_Music.mp3";
+import audioFile from "./DBS_Music.mp3";
 import { GiSoundOn, GiSoundOff } from "react-icons/gi";
 
 const MusicPlayer = () => {

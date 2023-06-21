@@ -20,7 +20,9 @@ const Register = () => {
               <Form.Label>Password:</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            <Button variant="danger">Register</Button>
+            <Button variant="danger" type="submit">
+              Register
+            </Button>
           </Form>
           <Row className="mt-3">
             <Col>
