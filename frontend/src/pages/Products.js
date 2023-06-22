@@ -48,12 +48,13 @@ const Products = ({ category }) => {
   }, [searchQuery, productsData, animeFilter, minPriceFilter, maxPriceFilter]);
   return (
     <Container>
+      <hr className="my-2" />
       <ProductFilters
         productsData={productsData}
         setFilteredProducts={setFilteredProducts}
       />
 
-      <hr className="my-3" />
+      <hr className="my-2" />
 
       <Row className="grid g-3">
         {filteredProducts.length > 0 ? (

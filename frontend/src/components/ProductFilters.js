@@ -28,7 +28,15 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
     setFilteredProducts(filteredProducts);
   };
 
-  const { handleSearch, searchQuery } = useContext(ShopContext);
+  const { handleSearch, searchQuery, setSearchQuery } = useContext(ShopContext);
+
+  const handleResetFilters = () => {
+    setAnimeFilter("");
+    setMinPriceFilter("");
+    setMaxPriceFilter("");
+    setSearchQuery(""); // Reset search query
+    handleFilters(); // Apply filters again to show all products
+  };
 
   return (
     <Form>
@@ -39,13 +47,14 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
           <InputGroup>
             <Form.Control
               type="text"
+              value={searchQuery}
               onChange={handleSearch}
               placeholder="Search products..."
             />
           </InputGroup>
         </Col>
 
-        <Col xs={6} md={3} lg={2}>
+        <Col xs={6} md={3} lg={3}>
           {/* Anime Filter */}
           <Form.Label>Filter by Anime:</Form.Label>
           <Form.Select
@@ -93,10 +102,17 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
           </InputGroup>
         </Col>
 
-        <Col xs={6} md={3} lg={3} className="d-flex align-items-end">
+        <Col xs={6} md={2} lg={1} className="d-flex align-items-end">
           {/* Apply Filters Button */}
           <Button variant="primary" onClick={handleFilters}>
             Apply Filters
+          </Button>
+        </Col>
+
+        <Col xs={6} md={2} lg={1} className="d-flex align-items-end">
+          {/* Reset Filters Button */}
+          <Button variant="secondary" onClick={handleResetFilters}>
+            Reset Filters
           </Button>
         </Col>
       </Row>
