@@ -11,6 +11,8 @@ import { ShopContext } from "../cart-context/Shop-Context";
 import Cart from "./Cart-Component/Cart";
 import MusicPlayer from "../features/MusicPlayer";
 import Search from "./Search";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
@@ -18,6 +20,15 @@ const Header = () => {
   const { cartItems } = useContext(ShopContext);
   const location = useLocation();
   const isProductsPage = location.pathname === "/products";
+
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   const handleCartClick = () => {
     setShowCart(!showCart); // Toggle the visibility of the shopping cart
@@ -69,8 +80,22 @@ const Header = () => {
           </Nav>
 
           <Nav>
-            <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
-            <Nav.Link onClick={() => navigate("/register")}>Register</Nav.Link>
+            {userInfo ? (
+              <>
+                <Nav.Link onClick={() => navigate("/profile")}>
+                  My Profile
+                </Nav.Link>
+                <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
+                <Nav.Link onClick={() => navigate("/register")}>
+                  Register
+                </Nav.Link>
+              </>
+            )}
+
             {/* <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link> */}
             <Nav.Link onClick={handleCartClick}>
               <div className="cart-icon">
