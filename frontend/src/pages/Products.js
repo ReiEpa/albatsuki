@@ -9,7 +9,8 @@ const Products = ({ category }) => {
   const [productsData, setProductsData] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const { searchQuery } = useContext(ShopContext);
+  const { searchQuery, animeFilter, minPriceFilter, maxPriceFilter } =
+    useContext(ShopContext);
 
   useEffect(() => {
     // Fetch products based on category (optional)
@@ -35,16 +36,16 @@ const Products = ({ category }) => {
   useEffect(() => {
     // Apply filters when filter values or products data change
     const applyFilters = () => {
-      let filtered = productsData.filter(
-        (product) =>
+      let filtered = productsData.filter((product) => {
+        return (
           searchQuery === "" ||
-          product.productName.toLowerCase().includes(searchQuery.toLowerCase()) // Filter by search query
-      );
+          product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
       setFilteredProducts(filtered);
     };
     applyFilters();
-  }, [searchQuery, productsData]);
-
+  }, [searchQuery, productsData, animeFilter, minPriceFilter, maxPriceFilter]);
   return (
     <Container>
       <ProductFilters

@@ -6,8 +6,10 @@ export const ShopContext = createContext(null);
 export const ShopContextProvider = ({ children }) => {
   const [productsData, setProductsData] = useState([]);
   const [cartItems, setCartItems] = useState({});
-
   const [searchQuery, setSearchQuery] = useState("");
+  const [animeFilter, setAnimeFilter] = useState("");
+  const [minPriceFilter, setMinPriceFilter] = useState("");
+  const [maxPriceFilter, setMaxPriceFilter] = useState("");
 
   const fetchData = async () => {
     try {
@@ -69,11 +71,15 @@ export const ShopContextProvider = ({ children }) => {
     productsData,
     updateCartItemCount,
     getTotalCartAmount,
-    setProductsData,
-    handleSearch,
-
     searchQuery,
     setSearchQuery,
+    animeFilter,
+    setAnimeFilter,
+    minPriceFilter,
+    setMinPriceFilter,
+    maxPriceFilter,
+    setMaxPriceFilter,
+    handleSearch,
   };
 
   return (
