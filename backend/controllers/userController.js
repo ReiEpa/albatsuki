@@ -1,56 +1,85 @@
-const bcrypt = require("bcrypt");
+const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
-// Register a new user
-const registerUser = async (req, res) => {
-  try {
-    const { username, password } = req.body;
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
 
-    // Check if the username already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already exists" });
-    }
+  const userExists = await User.findOne({ email });
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+  if (userExists) {
+    res.status(404);
+    throw new Error("User Already Exists");
+  }
 
-    // Create a new user
-    const newUser = new User({
-      username,
-      password: hashedPassword,
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
-
-    // Save the user to the database
-    await newUser.save();
-
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Failed to register user" });
+  } else {
+    res.status(400);
+    throw new Error('"Error Occurred');
   }
-};
+});
 
-// Login a user
-const loginUser = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    // Check if the user exists
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(401).json({ message: "Invalid username or password" });
-    }
-
-    // Check if the password is correct
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
-    if (!isPasswordCorrect) {
-      return res.status(401).json({ message: "Invalid username or password" });
-    }
-
-    res.status(200).json({ message: "Login successful" });
-  } catch (error) {
-    res.status(500).json({ message: "Failed to login" });
+const authUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400).json({ message: "Invalid Email or Password!" });
   }
-};
+});
 
-module.exports = { registerUser, loginUser };
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found!");
+  }
+});
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.deleteOne();
+    res.json({ message: "User deleted" });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+module.exports = { registerUser, authUser, updateUserProfile, deleteUser };
