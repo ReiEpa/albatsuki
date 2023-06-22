@@ -16,7 +16,7 @@ import { logout } from "../actions/userActions";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const { cartItems } = useContext(ShopContext);
   const location = useLocation();
   const isProductsPage = location.pathname === "/products";
@@ -96,7 +96,6 @@ const Header = () => {
               </>
             )}
 
-            {/* <Nav.Link onClick={() => navigate("/cart")}>Cart</Nav.Link> */}
             <Nav.Link onClick={handleCartClick}>
               <div className="cart-icon">
                 <AiOutlineShoppingCart />
