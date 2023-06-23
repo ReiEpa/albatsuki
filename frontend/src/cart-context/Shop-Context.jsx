@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { URL } from "../apis/URL";
-
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = ({ children }) => {
