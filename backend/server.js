@@ -15,10 +15,12 @@ app.get("/", (req, res) => {
 
 const productsRoutes = require("./routes/productsRoutes");
 const userRoutes = require("./routes/userRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
 app.use("/api/users", userRoutes);
 app.use("/products", productsRoutes);
+app.use("/api/users/:userId/cart", cartRoutes);
 
 require("./db");
 
