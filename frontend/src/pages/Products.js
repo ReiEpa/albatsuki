@@ -10,9 +10,8 @@ const Products = () => {
     useContext(ShopContext);
 
   useEffect(() => {
-    handleFilters(); // Apply filters initially
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // dependency array to run once on initial render
+    handleFilters();
+  }, []);
 
   return (
     <Container>
