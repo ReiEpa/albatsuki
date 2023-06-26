@@ -1,47 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ShopContext } from "../cart-context/Shop-Context";
 import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
 
-const ProductFilters = ({ productsData, setFilteredProducts }) => {
+const ProductFilters = ({ productsData }) => {
   const animeOptions = Array.from(
     new Set(productsData.map((product) => product.productAnime))
   );
-  const [animeFilter, setAnimeFilter] = useState("");
-  const [minPriceFilter, setMinPriceFilter] = useState("");
-  const [maxPriceFilter, setMaxPriceFilter] = useState("");
+  const categoryOptions = Array.from(
+    new Set(productsData.map((product) => product.productCategory))
+  );
 
-  const handleFilters = () => {
-    const filteredProducts = productsData.filter((product) => {
-      return (
-        (searchQuery === "" ||
-          product.productName
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())) &&
-        (animeFilter === "" || product.productAnime === animeFilter) &&
-        (minPriceFilter === "" ||
-          product.productPrice >= parseInt(minPriceFilter)) &&
-        (maxPriceFilter === "" ||
-          product.productPrice <= parseInt(maxPriceFilter))
-      );
-    });
-
-    setFilteredProducts(filteredProducts);
-  };
-
-  const { handleSearch, searchQuery, setSearchQuery } = useContext(ShopContext);
-
-  const handleResetFilters = () => {
-    setAnimeFilter("");
-    setMinPriceFilter("");
-    setMaxPriceFilter("");
-    setSearchQuery(""); // Reset search query
-    handleFilters(); // Apply filters again to show all products
-  };
+  const {
+    handleSearch,
+    searchQuery,
+    categoryFilter,
+    setCategoryFilter,
+    animeFilter,
+    setAnimeFilter,
+    minPriceFilter,
+    setMinPriceFilter,
+    maxPriceFilter,
+    setMaxPriceFilter,
+    handleFilters,
+    handleResetFilters,
+  } = useContext(ShopContext);
 
   return (
     <Form>
       <Row className="mb-3">
-        <Col xs={12} md={4} lg={3}>
+        <Col xs={12} md={4} lg={2}>
           {/* Search Input */}
           <Form.Label>Search by Name:</Form.Label>
           <InputGroup>
@@ -54,7 +41,7 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
           </InputGroup>
         </Col>
 
-        <Col xs={6} md={3} lg={3}>
+        <Col xs={6} md={3} lg={2}>
           {/* Anime Filter */}
           <Form.Label>Filter by Anime:</Form.Label>
           <Form.Select
@@ -65,6 +52,23 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
           >
             <option value="">All Anime</option>
             {animeOptions.map((anime) => (
+              <option key={anime} value={anime}>
+                {anime}
+              </option>
+            ))}
+          </Form.Select>
+        </Col>
+        <Col xs={6} md={3} lg={2}>
+          {/* Category Filter */}
+          <Form.Label>Filter by Category:</Form.Label>
+          <Form.Select
+            name="anime"
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className="form-select"
+          >
+            <option value="">All Category</option>
+            {categoryOptions.map((anime) => (
               <option key={anime} value={anime}>
                 {anime}
               </option>
@@ -102,14 +106,14 @@ const ProductFilters = ({ productsData, setFilteredProducts }) => {
           </InputGroup>
         </Col>
 
-        <Col xs={6} md={2} lg={1} className="d-flex align-items-end">
+        <Col xs={6} md={2} lg={1} className="d-flex align-items-end p-2">
           {/* Apply Filters Button */}
           <Button variant="primary" onClick={handleFilters}>
             Apply Filters
           </Button>
         </Col>
 
-        <Col xs={6} md={2} lg={1} className="d-flex align-items-end">
+        <Col xs={6} md={2} lg={1} className="d-flex align-items-end p-2">
           {/* Reset Filters Button */}
           <Button variant="secondary" onClick={handleResetFilters}>
             Reset Filters

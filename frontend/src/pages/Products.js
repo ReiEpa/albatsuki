@@ -1,58 +1,23 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
-import { URL } from "../apis/URL";
+
 import { ShopContext } from "../cart-context/Shop-Context";
 import ProductFilters from "../components/ProductFilters";
 
 const Products = ({ category }) => {
-  const [productsData, setProductsData] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const { searchQuery, animeFilter, minPriceFilter, maxPriceFilter } =
+  const { filteredProducts, productsData, handleFilters } =
     useContext(ShopContext);
 
   useEffect(() => {
-    // Fetch products based on category (optional)
-    const fetchData = async () => {
-      try {
-        const url = category
-          ? `${URL}/products?category=${category}`
-          : `${URL}/products`;
-        const res = await fetch(url);
-        const newProducts = await res.json();
-        const productsWithIds = newProducts.map((product, index) => ({
-          ...product,
-          id: index + 1,
-        }));
-        setProductsData(productsWithIds);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [category]);
+    handleFilters(); // Apply filters initially
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.location.href]); // dependency array to run once on initial render
 
-  useEffect(() => {
-    // Apply filters when filter values or products data change
-    const applyFilters = () => {
-      let filtered = productsData.filter((product) => {
-        return (
-          searchQuery === "" ||
-          product.productName.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      });
-      setFilteredProducts(filtered);
-    };
-    applyFilters();
-  }, [searchQuery, productsData, animeFilter, minPriceFilter, maxPriceFilter]);
   return (
     <Container>
       <hr className="my-2" />
-      <ProductFilters
-        productsData={productsData}
-        setFilteredProducts={setFilteredProducts}
-      />
+      <ProductFilters productsData={productsData} />
 
       <hr className="my-2" />
 

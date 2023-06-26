@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useState, useEffect } from "react";
 import { URL } from "../apis/URL";
 
@@ -10,7 +11,8 @@ export const ShopContextProvider = ({ children }) => {
   const [animeFilter, setAnimeFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState("");
   const [maxPriceFilter, setMaxPriceFilter] = useState("");
-
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState("");
   const fetchData = async () => {
     try {
       const res = await fetch(`${URL}/products`);
@@ -63,6 +65,33 @@ export const ShopContextProvider = ({ children }) => {
     }
     return totalAmount;
   };
+  const handleFilters = () => {
+    const filteredProducts = productsData.filter((product) => {
+      return (
+        (searchQuery === "" ||
+          product.productName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())) &&
+        (animeFilter === "" || product.productAnime === animeFilter) &&
+        (minPriceFilter === "" ||
+          product.productPrice >= parseInt(minPriceFilter)) &&
+        (maxPriceFilter === "" ||
+          product.productPrice <= parseInt(maxPriceFilter)) &&
+        (categoryFilter === "" || product.productCategory === categoryFilter)
+      );
+    });
+
+    setFilteredProducts(filteredProducts);
+  };
+  const handleResetFilters = () => {
+    setAnimeFilter("");
+    setMinPriceFilter("");
+    setMaxPriceFilter("");
+    setCategoryFilter("");
+    setSearchQuery(""); // Reset search query
+    handleFilters(); // Apply filters again to show all products
+    setFilteredProducts(productsData);
+  };
 
   const contextValue = {
     cartItems,
@@ -80,6 +109,13 @@ export const ShopContextProvider = ({ children }) => {
     maxPriceFilter,
     setMaxPriceFilter,
     handleSearch,
+    filteredProducts,
+    setFilteredProducts,
+    handleFilters,
+    handleResetFilters,
+
+    categoryFilter,
+    setCategoryFilter,
   };
 
   return (
