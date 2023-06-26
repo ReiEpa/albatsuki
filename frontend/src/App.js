@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
+import Checkout from "./components/Cart-Component/Checkout";
 
 const App = () => {
   return (
@@ -24,11 +25,12 @@ const App = () => {
         <div style={{ minHeight: "85vh" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/accessories" element={<Accessories />} />
-            <Route path="/clothes" element={<Clothes />} />
-            <Route path="/popular" element={<Popular />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="products" element={<Products />} />
+            <Route path="accessories" element={<Accessories />} />
+            <Route path="clothes" element={<Clothes />} />
+            <Route path="popular" element={<Popular />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />

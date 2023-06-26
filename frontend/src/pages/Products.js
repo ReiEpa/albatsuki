@@ -1,58 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
-import { URL } from "../apis/URL";
+
 import { ShopContext } from "../cart-context/Shop-Context";
 import ProductFilters from "../components/ProductFilters";
 
-const Products = ({ category }) => {
-  const [productsData, setProductsData] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const { searchQuery } = useContext(ShopContext);
+const Products = () => {
+  const { filteredProducts, productsData, handleFilters } =
+    useContext(ShopContext);
 
   useEffect(() => {
-    // Fetch products based on category (optional)
-    const fetchData = async () => {
-      try {
-        const url = category
-          ? `${URL}/products?category=${category}`
-          : `${URL}/products`;
-        const res = await fetch(url);
-        const newProducts = await res.json();
-        const productsWithIds = newProducts.map((product, index) => ({
-          ...product,
-          id: index + 1,
-        }));
-        setProductsData(productsWithIds);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [category]);
-
-  useEffect(() => {
-    // Apply filters when filter values or products data change
-    const applyFilters = () => {
-      let filtered = productsData.filter(
-        (product) =>
-          searchQuery === "" ||
-          product.productName.toLowerCase().includes(searchQuery.toLowerCase()) // Filter by search query
-      );
-      setFilteredProducts(filtered);
-    };
-    applyFilters();
-  }, [searchQuery, productsData]);
+    handleFilters(); // Apply filters initially
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // dependency array to run once on initial render
 
   return (
     <Container>
-      <ProductFilters
-        productsData={productsData}
-        setFilteredProducts={setFilteredProducts}
-      />
+      <hr className="my-2" />
+      <ProductFilters productsData={productsData} />
 
-      <hr className="my-3" />
+      <hr className="my-2" />
 
       <Row className="grid g-3">
         {filteredProducts.length > 0 ? (
