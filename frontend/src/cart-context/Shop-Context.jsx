@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useState, useEffect } from "react";
 import { URL } from "../apis/URL";
 export const ShopContext = createContext(null);
@@ -5,30 +6,56 @@ export const ShopContext = createContext(null);
 export const ShopContextProvider = ({ children }) => {
   const [productsData, setProductsData] = useState([]);
   const [cartItems, setCartItems] = useState({});
-
   const [searchQuery, setSearchQuery] = useState("");
+  const [animeFilter, setAnimeFilter] = useState("");
+  const [minPriceFilter, setMinPriceFilter] = useState("");
+  const [maxPriceFilter, setMaxPriceFilter] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState("");
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`${URL}/products`);
-      const newProducts = await res.json();
-      const productsWithIds = newProducts.map((product, index) => ({
-        ...product,
-        id: index + 1,
-      }));
-      setProductsData(productsWithIds);
+  const handleFilters = () => {
+    console.log("Before filtering:", productsData);
+    // Apply filters and update filteredProducts
 
-      const defaultCart = {};
-      for (let i = 1; i <= productsWithIds.length; i++) {
-        defaultCart[i] = 0;
-      }
-      setCartItems(defaultCart);
-    } catch (error) {
-      console.log(error);
-    }
+    const filteredProducts = productsData.filter((product) => {
+      return (
+        (searchQuery === "" ||
+          product.productName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())) &&
+        (animeFilter === "" || product.productAnime === animeFilter) &&
+        (minPriceFilter === "" ||
+          product.productPrice >= parseInt(minPriceFilter)) &&
+        (maxPriceFilter === "" ||
+          product.productPrice <= parseInt(maxPriceFilter)) &&
+        (categoryFilter === "" || product.productCategory === categoryFilter)
+      );
+    });
+
+    setFilteredProducts(filteredProducts);
+    console.log("After filtering:", filteredProducts);
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${URL}/products`);
+        const newProducts = await res.json();
+        const productsWithIds = newProducts.map((product, index) => ({
+          ...product,
+          id: index + 1,
+        }));
+        setProductsData(productsWithIds);
+
+        const defaultCart = {};
+        for (let i = 1; i <= productsWithIds.length; i++) {
+          defaultCart[i] = 0;
+        }
+        setCartItems(defaultCart);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
   }, []);
 
@@ -61,6 +88,16 @@ export const ShopContextProvider = ({ children }) => {
     return totalAmount;
   };
 
+  const handleResetFilters = () => {
+    setAnimeFilter("");
+    setMinPriceFilter("");
+    setMaxPriceFilter("");
+    setCategoryFilter("");
+    setSearchQuery(""); // Reset search query
+    handleFilters(); // Apply filters again to show all products
+    setFilteredProducts(productsData);
+  };
+
   const contextValue = {
     cartItems,
     addToCart,
@@ -68,11 +105,22 @@ export const ShopContextProvider = ({ children }) => {
     productsData,
     updateCartItemCount,
     getTotalCartAmount,
-    setProductsData,
-    handleSearch,
-
     searchQuery,
     setSearchQuery,
+    animeFilter,
+    setAnimeFilter,
+    minPriceFilter,
+    setMinPriceFilter,
+    maxPriceFilter,
+    setMaxPriceFilter,
+    handleSearch,
+    filteredProducts,
+    setFilteredProducts,
+    handleFilters,
+    handleResetFilters,
+
+    categoryFilter,
+    setCategoryFilter,
   };
 
   return (

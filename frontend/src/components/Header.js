@@ -5,12 +5,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { ShopContext } from "../cart-context/Shop-Context";
 import Cart from "./Cart-Component/Cart";
 import MusicPlayer from "../features/MusicPlayer";
-import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 
@@ -18,8 +17,6 @@ const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const navigate = useNavigate();
   const { cartItems } = useContext(ShopContext);
-  const location = useLocation();
-  const isProductsPage = location.pathname === "/products";
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -54,13 +51,7 @@ const Header = () => {
           <span id="brand">Albatsuki</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        {isProductsPage && (
-          <Nav>
-            <Nav.Link>
-              <Search />
-            </Nav.Link>
-          </Nav>
-        )}
+
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
