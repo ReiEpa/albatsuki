@@ -1,12 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import {
+  cartReducer,
   userLoginReducer,
   userRegisterReducer,
   userUpdateReducer,
 } from "./reducers/userReducers";
 
 const reducer = combineReducers({
+  cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userUpdate: userUpdateReducer,
