@@ -16,7 +16,6 @@ const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const navigate = useNavigate();
   const { cartItems } = useContext(ShopContext);
-
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
