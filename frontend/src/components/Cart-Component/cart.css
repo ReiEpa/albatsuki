@@ -50,3 +50,10 @@
 .cart-count {
   color: red;
 }
+.btn-checkout {
+  width: 25px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+}

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Product from "../components/Product";
 import { Container, Row, Col } from "react-bootstrap";
-
 import { ShopContext } from "../cart-context/Shop-Context";
 import ProductFilters from "../components/ProductFilters";
 

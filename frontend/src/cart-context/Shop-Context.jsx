@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import { URL } from "../apis/URL";
 export const ShopContext = createContext(null);
 
@@ -13,7 +12,7 @@ export const ShopContextProvider = ({ children }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
 
-  const handleFilters = () => {
+  const handleFilters = useCallback(() => {
     console.log("Before filtering:", productsData);
     // Apply filters and update filteredProducts
 
@@ -34,7 +33,14 @@ export const ShopContextProvider = ({ children }) => {
 
     setFilteredProducts(filteredProducts);
     console.log("After filtering:", filteredProducts);
-  };
+  }, [
+    productsData,
+    searchQuery,
+    animeFilter,
+    minPriceFilter,
+    maxPriceFilter,
+    categoryFilter,
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {

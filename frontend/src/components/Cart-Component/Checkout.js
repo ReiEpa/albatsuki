@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ShopContext } from "../../cart-context/Shop-Context";
+
 import {
   MDBBtn,
   MDBCard,
@@ -10,13 +12,16 @@ import {
   MDBRadio,
   MDBRow,
   MDBTable,
-  MDBTableBody,
   MDBTableHead,
 } from "mdb-react-ui-kit";
 
 import { Container } from "react-bootstrap";
+import CheckoutItem from "./Checkout-Item";
 
 const Checkout = () => {
+  const { productsData, cartItems, getTotalCartAmount } =
+    useContext(ShopContext);
+  const totalAmount = getTotalCartAmount();
   return (
     <Container>
       <section className="h-100 h-custom">
@@ -34,102 +39,13 @@ const Checkout = () => {
                     <th scope="col">Price</th>
                   </tr>
                 </MDBTableHead>
-                <MDBTableBody>
-                  <tr>
-                    <th scope="row">
-                      <div className="d-flex align-items-center">
-                        <img
-                          src="https://i.imgur.com/2DsA49b.webp"
-                          fluid
-                          className="rounded-3"
-                          style={{ width: "120px" }}
-                          alt="Book"
-                        />
-                        <div className="flex-column ms-4">
-                          <p className="mb-2">Thinking, Fast and Slow</p>
-                          <p className="mb-0">Daniel Kahneman</p>
-                        </div>
-                      </div>
-                    </th>
-                    <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        Digital
-                      </p>
-                    </td>
-                    <td className="align-middle">
-                      <div class="d-flex flex-row align-items-center">
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="minus" />
-                        </MDBBtn>
-
-                        <MDBInput
-                          min={0}
-                          type="number"
-                          size="sm"
-                          style={{ width: "50px" }}
-                          defaultValue={2}
-                        />
-
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="plus" />
-                        </MDBBtn>
-                      </div>
-                    </td>
-                    <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        $9.99
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div className="d-flex align-items-center">
-                        <img
-                          src="https://i.imgur.com/Oj1iQUX.webp"
-                          fluid
-                          className="rounded-3"
-                          style={{ width: "120px" }}
-                          alt="Book"
-                        />
-                        <div className="flex-column ms-4">
-                          <p className="mb-2">
-                            Homo Deus: A Brief History of Tomorrow
-                          </p>
-                          <p className="mb-0">Yuval Noah Harari</p>
-                        </div>
-                      </div>
-                    </th>
-                    <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        Paperback
-                      </p>
-                    </td>
-                    <td className="align-middle">
-                      <div class="d-flex flex-row align-items-center">
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="minus" />
-                        </MDBBtn>
-
-                        <MDBInput
-                          min={0}
-                          type="number"
-                          size="sm"
-                          style={{ width: "50px" }}
-                          defaultValue={1}
-                        />
-
-                        <MDBBtn className="px-2" color="link">
-                          <MDBIcon fas icon="plus" />
-                        </MDBBtn>
-                      </div>
-                    </td>
-                    <td className="align-middle">
-                      <p className="mb-0" style={{ fontWeight: "500" }}>
-                        $13.50
-                      </p>
-                    </td>
-                  </tr>
-                </MDBTableBody>
+                {productsData.map((product, id) => {
+                  if (cartItems[product.id] !== 0) {
+                    return <CheckoutItem key={id} product={product} />;
+                  } else {
+                    return null;
+                  }
+                })}
               </MDBTable>
             </MDBCol>
             <MDBCard
@@ -145,7 +61,7 @@ const Checkout = () => {
                           <MDBRadio
                             type="radio"
                             name="radio1"
-                            checked
+                            defaultChecked
                             value=""
                             aria-label="..."
                           />
@@ -165,7 +81,7 @@ const Checkout = () => {
                           <MDBRadio
                             type="radio"
                             name="radio1"
-                            checked
+                            defaultChecked
                             value=""
                             aria-label="..."
                           />
@@ -182,7 +98,7 @@ const Checkout = () => {
                           <MDBRadio
                             type="radio"
                             name="radio1"
-                            checked
+                            defaultChecked
                             value=""
                             aria-label="..."
                           />
@@ -224,16 +140,16 @@ const Checkout = () => {
                           label="Card Number"
                           placeholder="1111 2222 3333 4444"
                           size="lg"
-                          minlength="19"
-                          maxlength="19"
+                          minLength="19"
+                          maxLength="19"
                         />
                         <MDBInput
                           className="mb-4 mb-xl-5"
                           label="Cvv"
                           placeholder="&#9679;&#9679;&#9679;"
                           size="lg"
-                          minlength="3"
-                          maxlength="3"
+                          minLength="3"
+                          maxLength="3"
                           type="password"
                         />
                       </MDBCol>
@@ -245,7 +161,7 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Subtotal</p>
-                      <p className="mb-2">$23.49</p>
+                      <p className="mb-2">${totalAmount}</p>
                     </div>
 
                     <div
@@ -253,7 +169,7 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-0">Shipping</p>
-                      <p className="mb-0">$2.99</p>
+                      <p className="mb-0">$3.00</p>
                     </div>
 
                     <hr className="my-4" />
@@ -263,13 +179,13 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Total (tax included)</p>
-                      <p className="mb-2">$26.48</p>
+                      <p className="mb-2">${totalAmount - 3}</p>
                     </div>
 
                     <MDBBtn block size="lg">
                       <div className="d-flex justify-content-between">
                         <span>Checkout</span>
-                        <span>$26.48</span>
+                        <span>${totalAmount - 3}</span>
                       </div>
                     </MDBBtn>
                   </MDBCol>
