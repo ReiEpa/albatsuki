@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ShopContext } from "../../cart-context/Shop-Context";
-
 import {
   MDBBtn,
   MDBCard,
@@ -14,7 +13,6 @@ import {
   MDBTable,
   MDBTableHead,
 } from "mdb-react-ui-kit";
-
 import { Container } from "react-bootstrap";
 import CheckoutItem from "./Checkout-Item";
 
@@ -22,6 +20,35 @@ const Checkout = () => {
   const { productsData, cartItems, getTotalCartAmount } =
     useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
+  const [cardType, setCardType] = useState("");
+
+  const handleCardNumberChange = (e) => {
+    const cardNumber = e.target.value.replace(/\s/g, ""); // Remove whitespace from the card number
+
+    // Regular expressions for card types
+    const cardRegexes = {
+      visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+      mastercard: /^5[1-5][0-9]{14}$/,
+      amex: /^3[47][0-9]{13}$/,
+      discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+    };
+
+    let newCardType = "";
+
+    // Check the card number against the regexes
+    if (cardRegexes.visa.test(cardNumber)) {
+      newCardType = "Visa";
+    } else if (cardRegexes.mastercard.test(cardNumber)) {
+      newCardType = "Mastercard";
+    } else if (cardRegexes.amex.test(cardNumber)) {
+      newCardType = "American Express";
+    } else if (cardRegexes.discover.test(cardNumber)) {
+      newCardType = "Discover";
+    }
+
+    setCardType(newCardType);
+  };
+
   return (
     <Container>
       <section className="h-100 h-custom">
@@ -118,34 +145,44 @@ const Checkout = () => {
                   <MDBCol md="6" lg="4" xl="6">
                     <MDBRow>
                       <MDBCol size="12" xl="6">
+                        <label htmlFor="name">Name on Card</label>
                         <MDBInput
                           className="mb-4 mb-xl-5"
-                          label="Name on card"
+                          id="name"
                           placeholder="John Smiths"
                           size="lg"
                         />
+
+                        <label htmlFor="expiration">Expiration</label>
                         <MDBInput
                           className="mb-4 mb-xl-5"
-                          label="Expiration"
+                          id="expiration"
                           placeholder="MM/YY"
                           size="lg"
-                          maxLength={7}
-                          minLength={7}
+                          maxLength={4}
+                          minLength={4}
                         />
                       </MDBCol>
 
                       <MDBCol size="12" xl="6">
+                        <label htmlFor="cardNumber">Card Number</label>
                         <MDBInput
+                          id="cardNumber"
                           className="mb-4 mb-xl-5"
-                          label="Card Number"
                           placeholder="1111 2222 3333 4444"
                           size="lg"
                           minLength="19"
                           maxLength="19"
+                          onChange={handleCardNumberChange}
                         />
+                        {cardType && (
+                          <p className="mb-0 mt-2">Card Type: {cardType}</p>
+                        )}
+
+                        <label htmlFor="cvv">CVV</label>
                         <MDBInput
                           className="mb-4 mb-xl-5"
-                          label="Cvv"
+                          id="cvv"
                           placeholder="&#9679;&#9679;&#9679;"
                           size="lg"
                           minLength="3"
@@ -161,7 +198,7 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Subtotal</p>
-                      <p className="mb-2">${totalAmount - 3}</p>
+                      <p className="mb-2">${totalAmount}</p>
                     </div>
 
                     <div
@@ -169,7 +206,7 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-0">Shipping</p>
-                      <p className="mb-0">$3.00</p>
+                      <p className="mb-0">{totalAmount > 0 ? 3 : 0}</p>
                     </div>
 
                     <hr className="my-4" />
@@ -179,13 +216,15 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Total (tax included)</p>
-                      <p className="mb-2">${totalAmount}</p>
+                      <p className="mb-2">
+                        ${totalAmount > 0 ? totalAmount + 3 : 0}
+                      </p>
                     </div>
 
                     <MDBBtn block size="lg">
                       <div className="d-flex justify-content-between">
                         <span>Checkout</span>
-                        <span>${totalAmount}</span>
+                        <span>${totalAmount > 0 ? totalAmount + 3 : 0}</span>
                       </div>
                     </MDBBtn>
                   </MDBCol>
