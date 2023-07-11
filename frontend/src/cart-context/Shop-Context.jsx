@@ -12,6 +12,29 @@ export const ShopContextProvider = ({ children }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`${URL}/products`);
+        const newProducts = await res.json();
+        const productsWithIds = newProducts.map((product, index) => ({
+          ...product,
+          id: index + 1,
+        }));
+        setProductsData(productsWithIds);
+
+        const defaultCart = {};
+        for (let i = 1; i <= productsWithIds.length; i++) {
+          defaultCart[i] = 0;
+        }
+        setCartItems(defaultCart);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleFilters = useCallback(() => {
     console.log("Before filtering:", productsData);
     // Apply filters and update filteredProducts
@@ -41,29 +64,6 @@ export const ShopContextProvider = ({ children }) => {
     maxPriceFilter,
     categoryFilter,
   ]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(`${URL}/products`);
-        const newProducts = await res.json();
-        const productsWithIds = newProducts.map((product, index) => ({
-          ...product,
-          id: index + 1,
-        }));
-        setProductsData(productsWithIds);
-
-        const defaultCart = {};
-        for (let i = 1; i <= productsWithIds.length; i++) {
-          defaultCart[i] = 0;
-        }
-        setCartItems(defaultCart);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
