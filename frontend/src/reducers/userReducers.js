@@ -12,6 +12,8 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -66,6 +68,26 @@ export const userDeleteReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case USER_DELETE_FAIL:
       return { loading: false, error: action.payload, success: false };
+    default:
+      return state;
+  }
+};
+
+export const cartReducer = (state = { cartItems: [] }, action) => {
+  switch (action.type) {
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cartItems: [...state.cartItems, action.payload],
+      };
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (item) => item._id !== action.payload
+        ),
+      };
+    // ... other cases ...
     default:
       return state;
   }

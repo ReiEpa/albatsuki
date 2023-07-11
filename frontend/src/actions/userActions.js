@@ -1,4 +1,6 @@
 import {
+  REMOVE_FROM_CART,
+  ADD_TO_CART,
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
@@ -132,6 +134,74 @@ export const deleteUserAction = (id) => async (dispatch, getState) => {
       type: USER_DELETE_SUCCESS,
       payload: data,
     });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const addToCart = (product) => async (dispatch, getState) => {
+  try {
+    // Check if the user is logged in
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    if (userInfo) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `${URL}/api/users/${userInfo._id}/cart`,
+        { product },
+        config
+      );
+
+      dispatch({ type: ADD_TO_CART, payload: data });
+    }
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const removeFromCart = (productId) => async (dispatch, getState) => {
+  try {
+    // Check if the user is logged in
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    if (userInfo) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(
+        `${URL}/api/users/${userInfo._id}/cart/${productId}`,
+        config
+      );
+
+      dispatch({ type: REMOVE_FROM_CART, payload: data });
+    }
   } catch (error) {
     const message =
       error.response && error.response.data.message

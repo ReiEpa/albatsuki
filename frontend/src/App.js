@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Header from "./components/Header";
 import Cart from "./components/Cart-Component/Cart";
+// import Cart from "./components/cart-redux/Cart";
 import { ShopContextProvider } from "./cart-context/Shop-Context";
 import Accessories from "./pages/Accessories";
 import Clothes from "./pages/Clothes";

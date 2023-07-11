@@ -72,7 +72,6 @@ const Slideshow = () => {
   return (
     <div
       style={{
-        height: "600px",
         position: "relative",
         overflow: "hidden",
         backgroundColor: "black",

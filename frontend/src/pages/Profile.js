@@ -6,6 +6,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import { useNavigate } from "react-router-dom";
 import { deleteUserAction, updateProfile } from "../actions/userActions";
 import Loading from "../components/Loading";
+import { USER_LOGOUT } from "../constants/userConstants";
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -34,7 +35,7 @@ const Profile = () => {
       dispatch(deleteUserAction(userInfo._id))
         .then(() => {
           // After successful deletion, clear user info and navigate to the home page
-          dispatch({ type: "USER_LOGOUT" }); // Clear user info
+          dispatch({ type: USER_LOGOUT }); // Clear user info
           navigate("/");
         })
         .catch((error) => {

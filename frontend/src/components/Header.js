@@ -3,7 +3,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +16,6 @@ const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const navigate = useNavigate();
   const { cartItems } = useContext(ShopContext);
-
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -56,25 +54,13 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate("/products")}>Products</Nav.Link>
-            <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item onClick={() => navigate("/accessories")}>
-                Accessories
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => navigate("/clothes")}>
-                Clothes
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={() => navigate("/popular")}>
-                Popular Anime
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
 
           <Nav>
             {userInfo ? (
               <>
                 <Nav.Link onClick={() => navigate("/profile")}>
-                  My Profile
+                  {userInfo.name}
                 </Nav.Link>
                 <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
               </>
