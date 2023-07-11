@@ -161,7 +161,7 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Subtotal</p>
-                      <p className="mb-2">${totalAmount}</p>
+                      <p className="mb-2">${totalAmount - 3}</p>
                     </div>
 
                     <div
@@ -179,13 +179,13 @@ const Checkout = () => {
                       style={{ fontWeight: "500" }}
                     >
                       <p className="mb-2">Total (tax included)</p>
-                      <p className="mb-2">${totalAmount - 3}</p>
+                      <p className="mb-2">${totalAmount}</p>
                     </div>
 
                     <MDBBtn block size="lg">
                       <div className="d-flex justify-content-between">
                         <span>Checkout</span>
-                        <span>${totalAmount - 3}</span>
+                        <span>${totalAmount}</span>
                       </div>
                     </MDBBtn>
                   </MDBCol>
