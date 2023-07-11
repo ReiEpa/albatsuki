@@ -3,15 +3,12 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
+const path = require("path");
 
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
-
-app.get("/", (req, res) => {
-  res.send("Hello server");
-});
 
 const productsRoutes = require("./routes/productsRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -23,6 +20,24 @@ app.use("/products", productsRoutes);
 app.use("/api/users/:userId/cart", cartRoutes);
 
 require("./db");
+
+// ------------- deployment -----------
+
+__dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  const root = path.join(__dirname, "../frontend/build");
+  app.use(express.static(root));
+
+  app.get("*", (req, res) => {
+    res.sendFile("index.html", { root });
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("Hello NODE API");
+  });
+}
+
+// -------------- deployment -------------
 
 app.use(notFound);
 app.use(errorHandler);
