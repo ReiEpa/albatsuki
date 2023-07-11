@@ -36,7 +36,6 @@ export const ShopContextProvider = ({ children }) => {
   }, []);
 
   const handleFilters = useCallback(() => {
-    console.log("Before filtering:", productsData);
     // Apply filters and update filteredProducts
 
     const filteredProducts = productsData.filter((product) => {
@@ -55,7 +54,6 @@ export const ShopContextProvider = ({ children }) => {
     });
 
     setFilteredProducts(filteredProducts);
-    console.log("After filtering:", filteredProducts);
   }, [
     productsData,
     searchQuery,
