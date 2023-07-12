@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import { ShopContext } from "../../cart-context/Shop-Context";
 
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCol,

@@ -1,1 +1,1 @@
-export const URL = "https://albatsuki.onrender.com/";
+export const URL = "https://albatsuki.onrender.com";
